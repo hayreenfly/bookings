@@ -3,19 +3,20 @@ package main
 import (
 	"fmt"
 	"github.com/alexedwards/scs/v2"
-	"github.com/hayreenfly/bookings/pkg/config"
-	"github.com/hayreenfly/bookings/pkg/handlers"
-	"github.com/hayreenfly/bookings/pkg/render"
+	"github.com/hayreenfly/bookings/internal/config"
+	"github.com/hayreenfly/bookings/internal/handlers"
+	"github.com/hayreenfly/bookings/internal/render"
 	"log"
 	"net/http"
 	"time"
 )
 
 const portNumber = ":8080"
+
 var app config.AppConfig
 var session *scs.SessionManager
 
-func main(){
+func main() {
 
 	// change this to true when in production
 	app.InProduction = false
@@ -40,18 +41,15 @@ func main(){
 	repo := handlers.NewRepo(&app)
 	handlers.NewHandlers(repo)
 
-
 	render.NewTemplates(&app)
-
 
 	fmt.Println(fmt.Sprintf("Starting application on port %s", portNumber))
 
 	srv := &http.Server{
-		Addr: portNumber,
+		Addr:    portNumber,
 		Handler: routes(&app),
 	}
 
 	err = srv.ListenAndServe()
 	log.Fatal(err)
 }
-
