@@ -62,6 +62,11 @@ chmod +x run.sh
 ```
 
 ### Database
+To create a migration:
+```shell
+soda generate fizz <MigrationName>
+```
+
 To run migration:
 ```shell
 soda migrate

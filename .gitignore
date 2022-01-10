@@ -1,3 +1,5 @@
 .idea
 coverage*
 database.yml
+bookings
+.DS_Store
